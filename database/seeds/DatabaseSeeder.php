@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // TODO add factories and seeds for project
         // $this->call(UsersTableSeeder::class);
     }
 }

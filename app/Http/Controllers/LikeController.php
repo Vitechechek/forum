@@ -11,8 +11,9 @@ class LikeController extends Controller
 
     public function toggleLike()
     {
-
+        // TODO
         $commentId = Input::get('commentId');
+        // TODO move comment into url params
         $comment = Comment::find($commentId);
 
         if(!$comment->isLiked()) {

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Notification;
 
 class CommentController extends Controller
 {
-
+    // TODO only index, create, store, show, edit, update, destroy
     public function addThreadComment(Request $request, Thread $thread)
     {
         $this->validate($request, [
@@ -20,6 +20,7 @@ class CommentController extends Controller
         $thread->addComment($request->comment);
 
         //$users = $thread->commentators();
+        // TODO notify only subscribers!!!
         auth()->user()->notify(new RepliedToThread());
         //Notification::send($users, new RepliedToThread());
 
@@ -29,12 +30,14 @@ class CommentController extends Controller
 
     public function addReplyComment(Request $request, Comment $comment)
     {
+        // TODO
         $this->validate($request, [
             'comment' => 'required'
         ]);
 
         $comment->addComment($request->comment);
 
+        // TODO
         return back()->withMessage("Reply created");
     }
 
@@ -95,20 +98,25 @@ class CommentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Comment $comment
+     *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, Comment $comment)
     {
         $this->authorize('update', $comment);
 
+        // TODO
         $this->validate($request, [
             'comment'=>'required'
         ]);
 
+        // TODO
         $comment->update($request->all());
 
+        // TODO
         return back()->withMessage("Comment updated");
     }
 

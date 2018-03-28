@@ -10,7 +10,7 @@ class ThreadController extends Controller
 {
     public function __construct()
     {
-        return $this->middleware('auth')->except('index');
+        $this->middleware('auth')->except('index');
     }
 
     /**
@@ -21,6 +21,7 @@ class ThreadController extends Controller
     public function index()
     {
         $threads = Thread::paginate(15);
+
         return view('thread.index', compact('threads'));
     }
 
@@ -42,14 +43,17 @@ class ThreadController extends Controller
      */
     public function store(Request $request)
     {
+        // TODO move this to request class
         $this->validate($request, [
             'subject'=>'required|min:10',
             'type'=>'required',
             'thread'=>'required|min:20',
         ]);
 
+        // TODO use validate method
         auth()->user()->threads()->create($request->all());
 
+        // Use once brackets
         return back()->withMessage("Thread created");
     }
 
@@ -72,26 +76,30 @@ class ThreadController extends Controller
      */
     public function edit(Thread $thread)
     {
-        return(view('thread.edit', compact('thread')));
+        return view('thread.edit', compact('thread'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Thread  $thread
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Thread $thread
+     *
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, Thread $thread)
     {
         $this->authorize('update', $thread);
 
+        // TODO
         $this->validate($request, [
             'subject'=>'required|min:10',
             'type'=>'required',
             'thread'=>'required|min:20',
         ]);
 
+        // TODO
         $thread->update($request->all());
 
         return redirect()->route('thread.show', $thread->id)->withMessage("Thread updated");
@@ -100,8 +108,10 @@ class ThreadController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Thread  $thread
+     * @param  \App\Thread $thread
+     *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Thread $thread)
     {
@@ -115,12 +125,13 @@ class ThreadController extends Controller
 
     public function markAsSolution()
     {
+        // TODO use request() function and dont create not need vars
         $solutionId = Input::get('solutionId');
         $threadId = Input::get('threadId');
         $thread = Thread::find($threadId);
         $thread->solution = $solutionId;
-        if($thread->save())
-        {
+        if($thread->save()) {
+            // TODO
             return back()->withMessage("Marked");
         }
     }

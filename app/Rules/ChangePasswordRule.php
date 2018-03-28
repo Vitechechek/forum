@@ -26,10 +26,11 @@ class ChangePasswordRule implements Rule
     {
         $user = auth()->user();
 
-        if(!Hash::check($this->password, $user->password))
-        {
+        if(!Hash::check($this->password, $user->password)) {
             return false;
         }
+        // TODO add rule : old password can not be same new password
+
 
         return true;
     }

@@ -10,12 +10,10 @@ use Illuminate\Support\Facades\Storage;
 
 class UserProfileController extends Controller
 {
-
     public function __construct()
     {
-        return $this->middleware('auth');
+        $this->middleware('auth');
     }
-
 
     public function index(User $user)
     {
@@ -28,21 +26,15 @@ class UserProfileController extends Controller
 
     public function update(Request $request)
     {
-        if ($request->hasFile('image'))
-        {
-            $oldFilename = auth()->user()->image;
+        if ($request->hasFile('image')) {
+            $oldFileName = auth()->user()->image;
+            $fileName = $request->file('image')->store('public');
 
-            $request->file('image')->store('public');
+            auth()->user()->update(['image' => $fileName]);
 
-            $file_name = $request->file('image')->hashName();
-
-            $user = auth()->user();
-            $user->image = $file_name;
-            $user->save();
-
-            Storage::delete(config('app.fileDestinationPath'). '/public/' . $oldFilename);
+            Storage::delete(config('app.fileDestinationPath'). '/public/' . $oldFileName);
         }
 
-        return back()->withMessage("kek");
+        return back()->withMessage('kek');
     }
 }

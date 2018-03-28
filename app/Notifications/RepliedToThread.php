@@ -41,6 +41,8 @@ class RepliedToThread extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+
+        // TODO add link to the thread
         return (new MailMessage)
                     ->line('Someone replied to your thread.')
                     ->action('Thread', url('/'))

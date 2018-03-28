@@ -29,6 +29,7 @@ class ChangePasswordRequest extends FormRequest
                 'required',
                 new ChangePasswordRule($this->request->get('old_password'))
             ],
+            // TODO use confirmed rule for password
             'password'=>'required',
             'password_confirmation'=>'required|same:password'
         ];

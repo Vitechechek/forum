@@ -14,6 +14,7 @@ class AddUserIdToThreads extends Migration
     public function up()
     {
         Schema::table('threads', function (Blueprint $table) {
+            // TODO add foreign keys for ALL tables if we have migrate key
             $table->integer('user_id');
         });
     }

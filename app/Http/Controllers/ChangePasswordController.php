@@ -19,6 +19,7 @@ class ChangePasswordController extends Controller
 
     public function __construct()
     {
+        // TODO constructor NEVER return
         return $this->middleware('auth');
     }
 
@@ -27,6 +28,7 @@ class ChangePasswordController extends Controller
     {
         auth()->user()->update(['password'=>bcrypt(request('password'))]);
 
+        // TODO
         return back()->with('success', "Password has been changed");
     }
 }
