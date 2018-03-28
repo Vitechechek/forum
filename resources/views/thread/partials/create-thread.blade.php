@@ -1,0 +1,1 @@
+<a class="btn btn-outline-primary" href="{{route('thread.create')}}"><i class="fas fa-plus"></i> Create Thread</a>
