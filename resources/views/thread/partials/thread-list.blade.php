@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <p class="card-text">{{ str_limit($thread->thread, 100 )}}</p>
                     <hr>
-                    <lead><em style="color: black;">Created by: </em><a href="{{route('user_profile', $thread->user->name)}}">{{$thread->user->name}}</a> <em>{{$thread->created_at->diffForHumans()}}</em></lead>
+                    <lead><em style="color: black;">Created by: </em><a href="{{route('user_profile', $thread->user->name)}}">{{$thread->user->name}}</a> <em>{{$thread->created_at ? $thread->created_at->diffForHumans(): '-'}}</em></lead>
                 </div>
             </div>
         </a>

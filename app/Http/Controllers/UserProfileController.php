@@ -35,6 +35,6 @@ class UserProfileController extends Controller
             Storage::delete(config('app.fileDestinationPath'). '/public/' . $oldFileName);
         }
 
-        return back()->withMessage('kek');
+        return back()->withMessage('Profile picture updated');
     }
 }

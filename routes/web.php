@@ -17,9 +17,7 @@ Route::get('/', function () {
     return view('welcome', compact('threads'));
 });
 
-Route::get('/changepassword', function () {
-    return view('auth.change-password');
-});
+Route::get('/changepassword', 'ChangePasswordController@create');
 
 Route::resource('/thread', 'ThreadController');
 Route::resource('comment', 'CommentController', ['only' => ['update', 'destroy']]);

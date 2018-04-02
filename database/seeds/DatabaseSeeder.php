@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,7 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // TODO add factories and seeds for project
-        // $this->call(UsersTableSeeder::class);
+        Model::unguard();
+
+        //$this->call(UserTableSeeder::class);
+        //$this->call(ThreadTableSeeder::class);
+        $this->call(CommentTableSeeder::class);
+
+        Model::reguard();
     }
 }

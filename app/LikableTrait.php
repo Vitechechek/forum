@@ -11,12 +11,10 @@ namespace App;
 
 trait LikableTrait
 {
-
     public function likes()
     {
         return $this->morphMany(Like::class, 'likable');
     }
-
 
     public function like()
     {
@@ -28,12 +26,10 @@ trait LikableTrait
         return $like;
     }
 
-
     public function dislike()
     {
         $this->likes()->where('user_id', auth()->id())->delete();
     }
-
 
     public function isLiked()
     {

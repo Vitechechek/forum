@@ -128,7 +128,7 @@
                             <div class="card-footer">
                                 <div class="actions">
 
-                                    <a href="#{{$reply->id}}" data-toggle="modal" class="btn btn-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                                    <a href="#{{$reply->id}}" data-target="#{{$reply->id}}" data-toggle="modal" class="btn btn-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
 
                                     <div class="modal fade" id="{{$reply->id}}">
                                         <div class="modal-dialog" role="document">
