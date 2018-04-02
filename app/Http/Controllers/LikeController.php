@@ -4,16 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 
 class LikeController extends Controller
 {
-
-    public function toggleLike()
+    public function toggleLike(Request $request)
     {
 
-        $commentId = Input::get('commentId');
-        $comment = Comment::find($commentId);
+        $comment = Comment::find($request->commentId);
 
         if(!$comment->isLiked()) {
             $comment->like();
@@ -26,6 +23,5 @@ class LikeController extends Controller
         $likes = $comment->likes()->count();
 
         return response()->json(['status'=>'success', 'message'=>'unliked', 'likes'=>$likes]);
-
     }
 }
